@@ -1,6 +1,7 @@
 package com.dicoding.newsapp.ui.list
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.compose.foundation.clickable
@@ -54,7 +55,10 @@ class NewsAdapter(private val onItemClick: (NewsEntity) -> Unit) :
                         news.urlToImage,
                         news.title,
                         news.publishedAt,
-                        onItemClick = { onItemClick(news) }
+                        onItemClick = {
+                            onItemClick(news)
+                            Log.d("TAG", "bind: test")
+                        }
                     )
                 }
             }
@@ -83,7 +87,10 @@ fun NewsItem(
     publishedAt: String,
     onItemClick: () -> Unit
 ) {
-    ConstraintLayout(modifier = Modifier.clickable { onItemClick() }) {
+    ConstraintLayout(modifier = Modifier.clickable {
+        onItemClick()
+        Log.d("TAG", "NewsItem: test")
+    }) {
         val (posterImage, titleText, publishedDateText) = createRefs()
 
         AsyncImage(
